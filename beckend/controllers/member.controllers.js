@@ -44,7 +44,7 @@ async function findAllMember(req, res) {
 
 async function deleteMember(req, res) {
 
-    let memberData = await memberModel.findOneAndDelete({_id:req.body.id})
+    let memberData = await memberModel.findOneAndDelete({ _id: req.body.id })
 
     return res.json({
         success: true,
@@ -57,7 +57,8 @@ async function deleteMember(req, res) {
 
 
 
-export {createMember,
-  findAllMember,
-  deleteMember
+export {
+    createMember,
+    findAllMember,
+    deleteMember
 }
