@@ -2,10 +2,12 @@ import express from 'express';
 import authModel from '../models/auth.Model.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import dbConnection from '../database/dbConnection.js';
 let router = express.Router();
 
 
 router.post('/registration', async function (req, res) {
+  dbConnection()
   let data = req.body
   let hashPassword = await bcrypt.hash(data.password, 10)
 
@@ -33,6 +35,7 @@ router.post('/registration', async function (req, res) {
 
 
 router.post('/login', async function (req, res) {
+  dbConnection()
   let dbData = await authModel.findOne({ email: req.body.email, role: req.body.role, })
   if (!dbData) {
     return res.json({ success: false, message: "The email and role is not found for same user" })
